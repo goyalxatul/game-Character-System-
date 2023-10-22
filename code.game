@@ -1,0 +1,105 @@
+#include <bits/stdc++.h>
+#include <string>
+
+using namespace std;
+
+class Character {
+protected:
+    string species;
+    string occupation;
+    double height;
+    string appearance;
+    string weapon;
+    string friendName;
+    int energy;
+    string miniBiography;
+    int mana;
+    int health;
+
+public:
+    Character(string species, string occupation, double height, string appearance, string weapon, string friendName,
+              int energy, string miniBiography, int mana, int health)
+            : species(species), occupation(occupation), height(height), appearance(appearance), weapon(weapon),
+              friendName(friendName), energy(energy), miniBiography(miniBiography), mana(mana), health(health) {}
+
+    virtual void display() {
+        cout << "Species: " << species << endl;
+        cout << "Occupation: " << occupation << endl;
+        cout << "Height: " << height << endl;
+        cout << "Appearance: " << appearance << endl;
+        cout << "Weapon: " << weapon << endl;
+        cout << "Friend: " << friendName << endl;
+        cout << "Energy: " << energy << endl;
+        cout << "Mini Biography: " << miniBiography << endl;
+        cout << "Mana: " << mana << endl;
+        cout << "Health: " << health << endl;
+    }
+};
+
+class Warrior : public Character {                       //use of inheritance
+public:
+    Warrior(string species, string occupation, double height, string appearance, string weapon, string friendName,
+            int energy, string miniBiography, int mana, int health)
+            : Character(species, occupation, height, appearance, weapon, friendName, energy, miniBiography, mana, health) {}
+
+    void display() override {                        //overriding 
+        cout << "This is a Warrior." << endl;
+        Character::display();
+    }
+};
+
+class Wizard : public Character {
+public:
+    Wizard(string species, string occupation, double height, string appearance, string weapon, string friendName,
+           int energy, string miniBiography, int mana, int health)
+            : Character(species, occupation, height, appearance, weapon, friendName, energy, miniBiography, mana, health) {}
+
+    void display() override {
+        cout << "This is a Wizard." << endl;
+        Character::display();
+    }
+};
+
+class Elf : public Character {
+public:
+    Elf(string species, string occupation, double height, string appearance, string weapon, string friendName,
+        int energy, string miniBiography, int mana, int health)
+            : Character(species, occupation, height, appearance, weapon, friendName, energy, miniBiography, mana, health) {}
+
+    void display() override {
+        cout << "This is an Elf." << endl;
+        Character::display();
+    }
+};
+
+int main() {
+    int a;
+    Character *selectedCharacter = nullptr;
+
+    Warrior warrior("Human", "Warrior", 1.8, "Muscular", "Sword", "Knight", 100, "A brave warrior fighting for justice.", 50, 100);
+    Wizard wizard("Human", "Wizard", 1.6, "Wise-looking", "Staff", "Mage", 150, "Master of arcane arts.", 200, 80);
+    Elf elf("Elf", "Archer", 1.7, "Graceful", "Bow", "Fairy", 120, "Protector of the forest.", 100, 120);
+
+    cout << "Enter the character you like to choose from 1) Warrior, 2) Wizard, 3) Elf: ";
+    cin >> a;
+
+    switch (a) {
+        case 1:
+            selectedCharacter = &warrior;
+            break;
+        case 2:
+            selectedCharacter = &wizard;
+            break;
+        case 3:
+            selectedCharacter = &elf;
+            break;
+    }
+
+    if (selectedCharacter) {
+        selectedCharacter->display();
+    } else {
+        cout << "Invalid choice." << endl;
+    }
+
+    return 0;
+}
